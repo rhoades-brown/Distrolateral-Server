@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "DistrolateralServer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:5001"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "commandLineArgs": "-HasBuckets  -Upstream https://myupstream -AdditionalNodes node1, node2",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  }
+}

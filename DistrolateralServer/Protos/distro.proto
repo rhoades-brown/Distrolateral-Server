@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "DistrolateralServer.Protos";
+
+package distro;
+
+// Definition of the Distrobuter gRPC service
+service Distrobuter {
+  // Tests if a file exists in the local repository.
+  rpc TestFile (FileRequest) returns (StatusReply);
+  rpc StageFile (FileRequest) returns (StatusReply);
+}
+
+message FileRequest { // FileRequest request passing the file name to the calls
+  string fileName = 1; // The filename in the request.
+}
+
+message StatusReply { // StatusReply response from FileRequest type
+	FileStatus status  = 1;
+}
+
+enum FileStatus {
+  AVAILABLE = 0;   // The file exists in the local repository and is ready for client download from the local repository.
+  STAGED = 1;      // The file exists in an upstream repository and is ready for client download or staging.
+  DOWNLOADING = 2; // The file is downloading from the upstream repository into the local repository.
+  MISSING = 3;     // The file does not exist in the local or upstream repository.
+  REMOVED = 4;     // The file did exist but has been marked as unavailable.
+}
